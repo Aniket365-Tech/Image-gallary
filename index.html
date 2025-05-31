@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Interactive Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+            Our Vibrant Gallery
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore a collection of beautiful images designed to inspire and delight. Click on any image to view it in full size!
+        </p>
+    </header>
+
+    <main class="container mx-auto">
+        <section class="gallery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="gallery-item bg-gradient-to-br from-purple-400 to-indigo-600 p-2">
+                <img src="./images/Abstract art.jpeg" alt="Abstract Art" data-full-src="./images/Abstract art.jpeg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Abstract Art</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-pink-400 to-red-500 p-2">
+                <img src="./images/nature beuty.jpg" alt="Nature's Beauty" data-full-src="./images/nature beuty.jpg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Nature's Beauty</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-green-400 to-blue-500 p-2">
+                <img src="./images/city light.jpeg" alt="City Lights" data-full-src="./images/city light.jpeg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">City Lights</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-yellow-400 to-orange-500 p-2">
+                <img src="./images/sunset view.jpeg" alt="Sunset View" data-full-src="./images/sunset view.jpeg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Sunset View</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-blue-400 to-cyan-500 p-2">
+                <img src="./images/mountain perk.jpeg" alt="Mountain Peaks" data-full-src="./images/mountain perk.jpeg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Mountain Peaks</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-red-400 to-purple-500 p-2">
+                <img src="./images/forest path.jpg" data-full-src="./images/forest path.jpg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Forest Path</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-teal-400 to-green-500 p-2">
+                <img src="./images/ocean waves.jpeg" alt="Ocean Waves" data-full-src="./images/ocean waves.jpeg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Ocean Waves</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-indigo-400 to-blue-600 p-2">
+                <img src="./images/desert dunes.jpg" alt="Desert Dunes" data-full-src="./images/desert dunes.jpg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Desert Dunes</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-lime-400 to-emerald-500 p-2">
+                <img src="/images/green fields.jpg" alt="Green Fields" data-full-src="/images/green fields.jpg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Green Fields</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-rose-400 to-fuchsia-500 p-2">
+                <img src="./images/cosmic view.jpg" alt="Cosmic View" data-full-src="./images/cosmic view.jpg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Cosmic View</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-sky-400 to-blue-700 p-2">
+                <img src="./images/anton-sobotyak-GHNLrAEJtys-unsplash.jpg" alt="Winter Wonderland" data-full-src="./images/anton-sobotyak-GHNLrAEJtys-unsplash.jpg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Winter Wonderland</span>
+                </div>
+            </div>
+
+            <div class="gallery-item bg-gradient-to-br from-orange-400 to-red-600 p-2">
+                <img src="./images/omid-armin-sHb5UyXumWA-unsplash.jpg" alt="Autumn Leaves" data-full-src="./images/omid-armin-sHb5UyXumWA-unsplash.jpg">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-title">Autumn Leaves</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="imageModal" class="modal">
+        <span class="close-button">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Full size image">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeButton = document.querySelector('.close-button');
+
+            // Add click event listener to each gallery item
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const fullSrc = item.querySelector('img').getAttribute('data-full-src');
+                    modalImage.src = fullSrc;
+                    imageModal.style.display = 'flex'; // Use flex to center content
+                });
+            });
+
+            // Close the modal when the close button is clicked
+            closeButton.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+            });
+
+            // Close the modal when clicking outside the image (on the modal background)
+            imageModal.addEventListener('click', (event) => {
+                // Check if the click target is the modal itself, not its children
+                if (event.target === imageModal) {
+                    imageModal.style.display = 'none';
+                }
+            });
+
+            // Close the modal when the ESC key is pressed
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && imageModal.style.display === 'flex') {
+                    imageModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

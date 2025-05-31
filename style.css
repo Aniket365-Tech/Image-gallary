@@ -1,0 +1,162 @@
+/* Custom CSS for vibrant colors and subtle animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem; /* Rounded corners for gallery items */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02); /* Lift and slightly enlarge on hover */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px; /* Fixed height for consistent grid */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            border-radius: 1rem;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05); /* Slight zoom on image within item */
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-title {
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Modal specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            backdrop-filter: blur(8px); /* Blur effect for background */
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: hidden; /* Hide overflow for rounded corners */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation-name: zoomIn;
+            animation-duration: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh; /* Limit height to viewport height */
+            display: block;
+            border-radius: 1rem;
+            object-fit: contain; /* Ensure image fits within bounds */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            background-color: rgba(0,0,0,0.8);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Keyframe animation for modal */
+        @keyframes zoomIn {
+            from {transform: scale(0.8); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            .gallery-item img {
+                height: 200px;
+            }
+            .modal-content img {
+                max-height: 70vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
+            .gallery-item img {
+                height: 180px;
+            }
+            .modal-content img {
+                max-height: 60vh;
+            }
+            .close-button {
+                font-size: 2rem;
+                width: 35px;
+                height: 35px;
+            }
+        }
